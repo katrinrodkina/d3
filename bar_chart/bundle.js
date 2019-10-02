@@ -8,7 +8,7 @@
 
   const render = data => {
     
-    const margin = {top:20, bottom:20, left:100, right:20};
+    const margin = {top:60, bottom:70, left:130, right:100};
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
           
@@ -20,7 +20,7 @@
      const yScale = d3.scaleBand()
     	.domain(data.map( d => d.country))
     	.range([0, innerHeight])
-  		.padding(0.1);
+  		.padding(0.2);
     
     const g = svg.append('g')
     	.attr('transform', `translate(${margin.left}, ${margin.top})`);
@@ -30,11 +30,24 @@
     console.log(yScale.domain());
     console.log(yScale.range());
 
-  	g.append('g').call(d3.axisLeft(yScale));
+    g.append('g').call(d3.axisLeft(yScale))
+      .selectAll('.domain, .tick line')
+      .remove()
+    
     g.append('g').call(d3.axisBottom(xScale))
-    	.attr('transform', `translate(${0}, ${innerHeight})`);
+      .attr('transform', `translate(${0}, ${innerHeight})`)
+      .append('text').attr('y', 40).attr('x', innerWidth/2).attr('fill', 'black').text('Population')
+      .select('.domain')
+      .remove()
       
-    g.selectAll('rect').data(data)
+      
+      
+    g.append('text')
+      .attr('y', -10)
+      .text('Top 10 Most Populous Countires')
+
+
+    g.selectAll('rect').data(data)  //joining data to rectungles
     	.enter().append('rect')
     	.attr('y', d => yScale(d.country))
     	.attr('width', d => xScale(d.population))
