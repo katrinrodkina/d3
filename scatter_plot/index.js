@@ -1,4 +1,4 @@
-import {select, csv, scaleLinear, max, scaleBand, axisLeft, axisBottom, format} from 'd3';
+import {select, csv, scaleLinear, max, scaleBand, axisLeft, axisBottom, format, scalePoint} from 'd3';
 
 const svg = select('svg');
 

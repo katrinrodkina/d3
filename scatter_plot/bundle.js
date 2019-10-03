@@ -47,11 +47,11 @@
       .text('Top 10 Most Populous Countires')
 
 
-    g.selectAll('rect').data(data)  //joining data to rectungles
-    	.enter().append('rect')
-    	.attr('y', d => yScale(d.country))
-    	.attr('width', d => xScale(d.population))
-    	.attr('height', yScale.bandwidth());
+    g.selectAll('circle').data(data)  //joining data to rectungles
+    	.enter().append('circle')
+    	.attr('cy', d => yScale(d.country) +  yScale.bandwidth() / 2)
+    	.attr('cx', d => xScale(d.population))
+    	.attr('r', yScale.bandwidth() / 2);
   };
 
   d3.csv('data.csv').then(data => {
